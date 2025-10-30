@@ -17,5 +17,17 @@ app.get("/api/hello", async (req, res) => {
   });
 });
 
+app.post("/vehicles", async (req, res) => {
+  res.json({
+
+    data: {
+      "resultCode": "2313231",
+      "vin": "VinXXXXXXX",
+      "status": "OK"
+    },
+    statusCode: 200
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
