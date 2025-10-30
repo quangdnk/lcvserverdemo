@@ -1,9 +1,9 @@
 import express from "express";
-import serverless from "serverless-http";
 
 const app = express();
 
 app.get("/", (req, res) => res.send("Hello from Express on Render!"));
+
 app.get("/api/hello", async (req, res) => {
   await new Promise(r => setTimeout(r, 500));
   res.json({
@@ -17,8 +17,5 @@ app.get("/api/hello", async (req, res) => {
   });
 });
 
-const handler = serverless(app);
-
-export default async function (req, res) {
-  await handler(req, res);
-}
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
