@@ -82,6 +82,31 @@ app.post("/api/reservation", async (req, res) => {
   }
 });
 
+app.delete("/api/reservation/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Reservation.findOneAndDelete({ ReservationNo: id });
+    if (!result) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: "Reservation not found"
+      });
+    }
+
+    res.json({
+      statusCode: 200,
+      message: "Deleted successfully",
+      data: result
+    });
+  } catch {
+    res.status(500).json({
+      statusCode: 500,
+      message: "Delete failed",
+      error: error.message
+    });
+  }
+})
+
 
 app.put("api/reservation/set", async (req, res) => {
   try {
@@ -89,6 +114,26 @@ app.put("api/reservation/set", async (req, res) => {
     const data = req.body;
     await collection.updateOne({}, { $set: data }, { upsert: true });
     res.json({ statusCode: 200, message: "Updated successfully", result });
+  } catch {
+    res.status(500).json({ error: error.message });
+  }
+})
+
+app.get("api/reservation/set", async (req, res) => {
+  try {
+    const collection = mongoose.connection.db.collection("reservation_setting");
+    const result = await collection.findOne({});
+    if (!result) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: "No reservation setting found"
+      });
+    }
+    res.json({
+      statusCode: 200,
+      message: "Fetched successfully",
+      data: result
+    });
   } catch {
     res.status(500).json({ error: error.message });
   }
