@@ -41,6 +41,17 @@ app.post("/vehicles", async (req, res) => {
   });
 });
 
+app.get("/api/debug-items", async (req, res) => {
+  try {
+    const collection = mongoose.connection.db.collection("reservation_item");
+    const items = await collection.find().toArray();
+    res.json({ count: items.length, items });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.get("/api/reservation", async (req, res) => {
   try {
     const collection = mongoose.connection.db.collection("reservation_item");
