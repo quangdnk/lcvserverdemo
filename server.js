@@ -44,6 +44,8 @@ app.post("/vehicles", async (req, res) => {
 app.get("/api/reservation", async (req, res) => {
   try {
     const items = await Reservation.find();
+    console.log(items);
+
     res.json({ statusCode: 200, data: { ResultCode: "xxxxxxx", data: items } })
   } catch {
     res.status(500).json({ statusCode: 500, data: { message: "ERROR MESSAGE " } });
