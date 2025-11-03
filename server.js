@@ -60,31 +60,31 @@ app.get("/api/reservation", async (req, res) => {
 
 
 
-    const jsonItems = items.map(item => ({
-      //   _id: item._id.toString(),
-      ReservationNo: Number(item.ReservationNo),
-      ActiveStatus: Number(item.ActiveStatus),
-      Repetition: {
-        Week: item.Repetition.Week.map(Number),
-        Hours: Number(item.Repetition.Hours),
-        Minutes: Number(item.Repetition.Minutes),
-        AcSettings: {
-          Temperature: item.Repetition.AcSettings.Temperature,
-          Steering: item.Repetition.AcSettings.Steering,
-          FrontDefogger: item.Repetition.AcSettings.FrontDefogger,
-          RearDefogger: item.Repetition.AcSettings.RearDefogger,
-          ShVlType: item.Repetition.AcSettings.ShVlType,
-          ShSettings: {
-            FrontDSeat: item.Repetition.AcSettings.ShSettings.FrontDSeat,
-            FrontPSeat: item.Repetition.AcSettings.ShSettings.FrontPSeat,
-            RearDSeat: item.Repetition.AcSettings.ShSettings.RearDSeat,
-            RearPSeat: item.Repetition.AcSettings.ShSettings.RearPSeat,
-          }
-        }
-      }
-    }));
+    // const jsonItems = items.map(item => ({
+    //   //   _id: item._id.toString(),
+    //   ReservationNo: Number(item.ReservationNo),
+    //   ActiveStatus: Number(item.ActiveStatus),
+    //   Repetition: {
+    //     Week: item.Repetition.Week.map(Number),
+    //     Hours: Number(item.Repetition.Hours),
+    //     Minutes: Number(item.Repetition.Minutes),
+    //     AcSettings: {
+    //       Temperature: item.Repetition.AcSettings.Temperature,
+    //       Steering: item.Repetition.AcSettings.Steering,
+    //       FrontDefogger: item.Repetition.AcSettings.FrontDefogger,
+    //       RearDefogger: item.Repetition.AcSettings.RearDefogger,
+    //       ShVlType: item.Repetition.AcSettings.ShVlType,
+    //       ShSettings: {
+    //         FrontDSeat: item.Repetition.AcSettings.ShSettings.FrontDSeat,
+    //         FrontPSeat: item.Repetition.AcSettings.ShSettings.FrontPSeat,
+    //         RearDSeat: item.Repetition.AcSettings.ShSettings.RearDSeat,
+    //         RearPSeat: item.Repetition.AcSettings.ShSettings.RearPSeat,
+    //       }
+    //     }
+    //   }
+    // }));
 
-    res.json({ statusCode: 200, data: { ResultCode: "xxxxxxx", data: { items: jsonItems } } })
+    res.json({ statusCode: 200, data: { ResultCode: "xxxxxxx", data: { items: items } } })
   } catch {
     res.status(500).json({ statusCode: 500, data: { message: "ERROR MESSAGE " } });
   };
