@@ -44,7 +44,12 @@ app.post("/vehicles", async (req, res) => {
 app.get("/api/reservation", async (req, res) => {
   try {
     const items = await Reservation.find().lean();
-    res.json({ statusCode: 200, data: { ResultCode: "xxxxxxx", data: { items: items } } })
+    const jsonItems = items.map(item => ({
+      ...item,
+      _id: item._id.toString(),
+    }));
+
+    res.json({ statusCode: 200, data: { ResultCode: "xxxxxxx", data: { items: jsonItems } } })
   } catch {
     res.status(500).json({ statusCode: 500, data: { message: "ERROR MESSAGE " } });
   };
