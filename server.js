@@ -43,7 +43,8 @@ app.post("/vehicles", async (req, res) => {
 
 app.get("/api/reservation", async (req, res) => {
   try {
-    const items = await Reservation.find().lean();
+    const collection = mongoose.connection.db.collection("reservation_setting");
+    const items = await collection.find().lean();
     const jsonItems = items.map(item => ({
       ...item,
       _id: item._id.toString(),
