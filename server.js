@@ -108,7 +108,7 @@ app.delete("/api/reservation/:id", async (req, res) => {
 })
 
 
-app.put("api/reservation/set", async (req, res) => {
+app.put("/api/reservation/set", async (req, res) => {
   try {
     const collection = db.collection("reservation_setting");
     const data = req.body;
@@ -119,10 +119,13 @@ app.put("api/reservation/set", async (req, res) => {
   }
 })
 
-app.get("api/reservation/set", async (req, res) => {
+app.get("/api/reservation/set", async (req, res) => {
   try {
+    console.log("GO HERE");
     const collection = mongoose.connection.db.collection("reservation_setting");
+
     const result = await collection.findOne({});
+
     if (!result) {
       return res.status(404).json({
         statusCode: 404,
