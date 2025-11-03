@@ -84,17 +84,19 @@ app.post("/api/reservation", async (req, res) => {
   try {
     const data = req.body;
 
-    const last = await Reservation.find().sort({ ReservationNo: -1 }).limit(1).toArray();
+    const last = await Reservation.find().sort({ ReservationNo: -1 }).limit(1);
     const newNo = last.length > 0 ? last[0].ReservationNo + 1 : 1;
 
-    newData.ReservationNo = newNo;
+    const newData = { ...data, ReservationNo: newNo };
     const result = await Reservation.create(newData);
+
     res.json({ statusCode: 200, data: result });
   } catch (err) {
     console.error(err);
     res.status(500).json({ statusCode: 500, message: "Insert failed" });
   }
 });
+
 
 app.delete("/api/reservation/:id", async (req, res) => {
   try {
