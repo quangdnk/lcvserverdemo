@@ -30,6 +30,12 @@ app.get("/api/hello", async (req, res) => {
   });
 });
 
+app.post("/app/check_new_body", async (req, res) => {
+  res.status(400).json({
+    "ErrorDetail": "IsInServiceMode"
+  })
+})
+
 app.post("/vehicles", async (req, res) => {
   res.json({
     data: {
