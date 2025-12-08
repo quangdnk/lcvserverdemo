@@ -30,7 +30,7 @@ app.get("/api/hello", async (req, res) => {
   });
 });
 
-app.post("//rctl/car-finder-light-request/", async (req, res) => {
+app.post("/rctl/car-finder-light-request/", async (req, res) => {
   res.status(200).json({
     "data": {
       "resultCode": "2313231",
