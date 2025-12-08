@@ -30,6 +30,14 @@ app.get("/api/hello", async (req, res) => {
   });
 });
 
+app.post("//rctl/car-finder-light-request/", async (req, res) => {
+  res.status(200).json({
+    "data": {
+      "resultCode": "2313231",
+    }
+  });
+});
+
 app.post("/app/check_new_body", async (req, res) => {
   res.status(400).json({
     "ErrorDetail": "IsInServiceMode"
@@ -40,7 +48,7 @@ app.post("/vehicles", async (req, res) => {
   res.json({
     data: {
       "resultCode": "2313231",
-      "vin": "VinXXXXXXX",
+      "data": "VinXXXXXXX",
       "status": "OK"
     },
     statusCode: 200
