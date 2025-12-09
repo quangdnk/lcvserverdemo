@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import Reservation from "./models/reservation.js";
 import dotenv from "dotenv";
+import { v4 as uuidv4 } from 'uuid';
+
 
 dotenv.config();
 
@@ -31,6 +33,8 @@ app.get("/api/hello", async (req, res) => {
 });
 
 app.post("/rctl/car-finder-light-request/", async (req, res) => {
+  const correlationId = uuidv4();
+  res.setHeader("Correlation-Id", correlationId);
   res.status(200).json({
     "data": {
       "resultCode": "2313231",
